@@ -54,6 +54,7 @@
                 command = {"${cfg.format.package}/bin/nixfmt"},
               },
             ''}
+          flake = ${toLuaObject cfg.lsp.flake},
             },
           },
         ''}
@@ -156,6 +157,12 @@ in {
         example = ''[lib.getExe pkgs.jdt-language-server "-data" "~/.cache/jdtls/workspace"]'';
         type = either package (listOf str);
         default = servers.${cfg.lsp.server}.package;
+      };
+
+      flake = mkOption {
+        type = nullOr (attrsOf anything);
+        default = null;
+        description = "Flake to pass to nil LSP server";
       };
 
       options = mkOption {
