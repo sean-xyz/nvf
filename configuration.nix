@@ -15,6 +15,7 @@ isMaximal: {
 
     spellcheck = {
       enable = true;
+      programmingWordlist.enable = isMaximal;
     };
 
     lsp = {
@@ -162,6 +163,7 @@ isMaximal: {
       enable = true;
       gitsigns.enable = true;
       gitsigns.codeActions.enable = false; # throws an annoying debug message
+      neogit.enable = isMaximal;
     };
 
     minimap = {
@@ -191,6 +193,7 @@ isMaximal: {
       surround.enable = isMaximal;
       leetcode-nvim.enable = isMaximal;
       multicursors.enable = isMaximal;
+      smart-splits.enable = isMaximal;
 
       motion = {
         hop.enable = true;
@@ -199,6 +202,7 @@ isMaximal: {
       };
       images = {
         image-nvim.enable = false;
+        img-clip.enable = isMaximal;
       };
     };
 
@@ -247,6 +251,7 @@ isMaximal: {
         cmp.enable = isMaximal;
       };
       codecompanion-nvim.enable = false;
+      avante-nvim.enable = isMaximal;
     };
 
     session = {

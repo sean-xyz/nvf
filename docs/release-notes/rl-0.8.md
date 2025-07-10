@@ -19,6 +19,15 @@
   unavailable as they have been refactored out of the main none-ls repository
   upstream.
 
+- `vim.useSystemClipboard` has been deprecated as a part of removing most
+  top-level convenience options, and should instead be configured in the new
+  module interface. You may set [](#opt-vim.clipboard.registers) appropriately
+  to configure Neovim to use the system clipboard.
+
+- Changed which-key group used for gitsigns from `<leader>g` to `<leader>h` to
+  align with the "hunks" themed mapping and avoid conflict with the new [neogit]
+  group.
+
 [NotAShelf](https://github.com/notashelf):
 
 [typst-preview.nvim]: https://github.com/chomosuke/typst-preview.nvim
@@ -90,6 +99,11 @@
 - Add `vim.diagnostics` to interact with Neovim's diagnostics module. Available
   options for `vim.diagnostic.config()` can now be customized through the
   [](#opt-vim.diagnostics.config) in nvf.
+
+- Add `vim.clipboard` module for easily managing Neovim clipboard providers and
+  relevant packages in a simple UI.
+  - This deprecates `vim.useSystemClipboard` as well, see breaking changes
+    section above for migration options.
 
 [amadaluzia](https://github.com/amadaluzia):
 
@@ -298,6 +312,7 @@
   `vim.diagnostics.nvim-lint.linters.*.required_files`.
 - Add global function `nvf_lint` under
   `vim.diagnostics.nvim-lint.lint_function`.
+- Deprecate `vim.scrollOffset` in favor of `vim.options.scrolloff`.
 
 [Sc3l3t0n](https://github.com/Sc3l3t0n):
 
@@ -336,9 +351,12 @@
 - Fix default telescope ignore list entry for '.git/' to properly match
 - Add [gitlinker.nvim] plugin to `vim.git.gitlinker-nvim`
 - Add [nvim-treesitter-textobjects] plugin to `vim.treesitter.textobjects`
+- Default to disabling Conform for Rust if rust-analyzer is used
+  - To force using Conform, set `languages.rust.format.enable = true`.
 
 [rrvsh](https://github.com/rrvsh):
 
+- Add custom snippet support to `vim.snippets.luasnip`
 - Fix namespace of python-lsp-server by changing it to python3Packages
 
 [Noah765](https://github.com/Noah765):
@@ -357,7 +375,10 @@
 
 [aionoid](https://github.com/aionoid):
 
+[avante-nvim]: https://github.com/yetone/avante.nvim
+
 - Fix [render-markdown.nvim] file_types option type to list, to accept merging.
+- Add [avante.nvim] plugin under `vim.assistant.avante-nvim`.
 
 [poz](https://poz.pet):
 
@@ -377,3 +398,51 @@
 - Add missing `right_align` option for existing `renderer.icons` options.
 - Add missing `render.icons` options (`hidden_placement`,
   `diagnostics_placement`, and `bookmarks_placement`).
+
+[cramt](https://github.com/cramt):
+
+- Add `rubylsp` option in `vim.languages.ruby.lsp.server` to use shopify's
+  ruby-lsp language server
+
+[Haskex](https://github.com/haskex):
+
+[solarized-osaka.nvim]: https://github.com/craftzdog/solarized-osaka.nvim
+
+- Add [solarized-osaka.nvim] theme
+
+[img-clip.nvim]: https://github.com/hakonharnes/img-clip.nvim
+
+- Add [img-clip.nvim] plugin in `vim.utility.images.img-clip` with `enable` and
+  `setupOpts`
+- Add `vim.utility.images.img-clip.enable = isMaximal` in configuration.nix
+
+[anil9](https://github.com/anil9):
+
+[clojure-lsp]: https://github.com/clojure-lsp/clojure-lsp
+[conjure]: https://github.com/Olical/conjure
+
+- Add Clojure support under `vim.languages.clojure` using [clojure-lsp]
+- Add code evaluation environment [conjure] under `vim.repl.conjure`
+
+[CallumGilly](https://github.com/CallumGilly):
+
+- Add missing `transparent` option for existing
+  [onedark.nvim](https://github.com/navarasu/onedark.nvim) theme.
+  
+[theutz](https://github.com/theutz):
+
+- Added "auto" flavour for catppuccin theme
+
+[lackac](https://github.com/lackac):
+
+[solarized.nvim]: https://github.com/maxmx03/solarized.nvim
+[smart-splits.nvim]: https://github.com/mrjones2014/smart-splits.nvim
+[neogit]: https://github.com/NeogitOrg/neogit
+
+- Add [solarized.nvim] theme with support for multiple variants
+- Add [smart-splits.nvim] for navigating between Neovim windows and terminal multiplexer panes.
+  Available at `vim.utility.smart-splits`.
+- Restore vim-dirtytalk plugin and fix ordering with spellcheck in generated config.
+- Fix lualine separator options
+- Add [neogit], an interactive and powerful Git interface for Neovim, inspired by Magit
+- Allow deregistering which-key binds or groups by setting them to `null`
